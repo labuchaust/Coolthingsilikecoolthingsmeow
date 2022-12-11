@@ -9,9 +9,12 @@ public class PlayerController : MonoBehaviour
     /// the character controller should respect the new values and act as detailed in the Unity inspector.
     /// </summary>
 
+    public BoxCollider2D box;
+    public LayerMask groundCheck;
+    public LayerMask player;
+    public Rigidbody2D coolb;
+    public Transform feet;
    
-
-    
 
     [SerializeField]
     private float m_jumpApexHeight;
@@ -45,23 +48,113 @@ public class PlayerController : MonoBehaviour
 
     public enum FacingDirection { Left, Right }
 
+    FacingDirection dirL;
+    FacingDirection dirR;
+
+
+
     public bool IsWalking()
     {
-
-
-        throw new System.NotImplementedException( "IsWalking in PlayerController has not been implemented." );
+       if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            Debug.Log("aaaaaaaaaa");
+            return true;
+        } 
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            Debug.Log("eeeeeeeeeeeeeee");
+            return true;
+        }
+       else
+        {
+            return false;
+        }
+     // throw new System.NotImplementedException( "IsWalking in PlayerController has not been implemented." );
     }
 
     public bool IsGrounded()
     {
+
+        Collider2D ground = Physics2D.OverlapCircle(feet.position, 0.5f, groundCheck);
+        if (ground != null)
+        {
+            Debug.Log("true");
+            return true;
+        }
+
       
-       throw new System.NotImplementedException( "IsGrounded in PlayerController has not been implemented." );
+
+        return false;
+
+      
+
+       // throw new System.NotImplementedException( "IsGrounded in PlayerController has not been implemented." );
     }
 
     public FacingDirection GetFacingDirection()
     {
-        throw new System.NotImplementedException( "GetFacingDirection in PlayerController has not been implemented." );
+
+
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        { dirR = FacingDirection.Left;
+        }
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+
+            dirR = FacingDirection.Right;
+            
+        }
+        return dirR;
+
+
+
+
+
+
+        // throw new System.NotImplementedException("GetFacingDirection in PlayerController has not been implemented.");
     }
 
     // Add additional methods such as Start, Update, FixedUpdate, or whatever else you think is necessary, below.
+
+
+    private void Start()
+    {
+        
+        dirR = FacingDirection.Right;
+        FacingDirection myDirection;
+
+        myDirection = FacingDirection.Right;
+    }
+    private void Update()
+    {
+
+        IsWalking();
+        GetFacingDirection();
+       
+        coolb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * m_maxHorizontalSpeed, coolb.velocity.y);
+
+
+        if (ShovelKnightInput.IsJumpPressed())
+        {
+            if(IsGrounded())
+            {
+                Debug.Log("time" + Time.realtimeSinceStartup);
+            }
+        }
+
+        //if (IsGrounded())
+        //{
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        Debug.Log("Duration in seconds" + Time.realtimeSinceStartup);
+        //    }
+          
+        //}
+
+    }
+    
 }
+
+
+// if (isGrounded == true){ can jump if keycode(jump) } + coyote time
+// addforce new vector2 (something, jumpapexheight)

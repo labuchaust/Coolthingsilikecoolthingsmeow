@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
     // Add additional methods such as Start, Update, FixedUpdate, or whatever else you think is necessary, below.
 
+    Rigidbody2D rb;
+    float jumpForce;
 
     private void Start()
     {
@@ -124,6 +126,11 @@ public class PlayerController : MonoBehaviour
         FacingDirection myDirection;
 
         myDirection = FacingDirection.Right;
+
+        rb = GetComponent<Rigidbody2D>();
+        
+
+
     }
     private void Update()
     {
@@ -139,6 +146,12 @@ public class PlayerController : MonoBehaviour
             if(IsGrounded())
             {
                 Debug.Log("time" + Time.realtimeSinceStartup);
+                rb.AddForce(Vector2.up * m_jumpApexTime, ForceMode2D.Force);
+
+
+                //we can put jump
+                //find out when player gets to apex
+                //push player down with negative AddForce and stop when isGrounded is true (--> Vector.Down *m_jumpapextime, forcemode2d.force)
             }
         }
 

@@ -1812,12 +1812,22 @@ PrefabInstance:
     - target: {fileID: 6722816699095443585, guid: 47f7451027f91be4584a64b9c091d617,
         type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722816699095443585, guid: 47f7451027f91be4584a64b9c091d617,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6722816699095443585, guid: 47f7451027f91be4584a64b9c091d617,
         type: 3}
       propertyPath: m_UseAutoMass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722816699095443585, guid: 47f7451027f91be4584a64b9c091d617,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6722816699095443585, guid: 47f7451027f91be4584a64b9c091d617,
         type: 3}
